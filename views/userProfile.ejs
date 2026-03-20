@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM: <%=user.name%>'s Profile</title>
+    <link rel="stylesheet" href="/userProfile.css">
+</head>
+<body>
+    <h3>Welcome to <%=user.name%>'s profile</h3>
+    <div class="personalInfo">
+        <div id="userIMG">
+            <img src="<%=user.image || '/image/cat.png'%>" alt="User profile">
+        </div>
+        <div id="name"><p>Name: <b><%=user.name%></b></p></div>
+        <div id="email"><p>Email: <b><%=user.email%></b></p></div>
+        <div id="phone"><p>Phone: <b><%=user.phoneNumber%></b></p></div>
+    </div>
+    <div>
+        <form action="<%= referer || '/dashboard' %>" method="get">
+            <button type="submit" class="home">Close</button>
+        </form>
+    </div>
+    <div id="delete">
+        <form method="get" action="/delete/<%=user._id%>">
+            <button type="submit">Delete your profile</button>
+        </form>
+    </div>
+</body>
+</html>

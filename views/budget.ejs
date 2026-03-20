@@ -1,16 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Management: Budget</title>
-</head>
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="/budget.css">
 <body>
-    <h1>This is budget page</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
+    <div class="budget-page">
+        <h3>My budget list</h3>
+        <% let totalBudget = 0; %>
+        <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+              padding: 8px;
+            }
+          </style>
+        <table border="1">
+            <tr>
+                <th>To Do</th>
+                <th>Budget</th>
+                <th>Delete</th>
+            </tr>
+            <% for(detail of budgetList){%>
+                <% totalBudget+= detail.budget; %>
+                <tr>
+                    <td><%=detail.todo%></td>
+                    <td><%=detail.budget%></td>
+                    <td>
+                        <form method="post" action="/budget/<%=detail._id%>/delete?_method=DELETE">
+                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+        </table>
+    
+        <p id="total-budget">Total budget: <%=totalBudget%></p>
+        <a href="/emergency" style="text-decoration: #5a189a; color: #fcd34d;">Check your emergency fund</a>
+    
+        <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+        <hr />
+    
+        <div class="createBudget">
+            <button id="show-form-btn">Add New Budget</button>
+            <form id="add-form" class="hidden" method="post" action="budget/<%=user._id%>/add">
+                <label for="todo">Budget For</label></br>
+                <textarea name="todo" rows="0" cols="50" maxlength="100"></textarea></br></br>
+                <label for="budget">Budget</label></br>
+                <input type="number" name="budget" min="0"  step="0.0001"></br></br>
+    
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>
-</html>

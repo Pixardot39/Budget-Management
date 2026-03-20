@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM: Report</title>
+    <link rel="stylesheet" href="/report.css"> <!-- Link to the footer CSS -->
+</head>
+<body>
+    <div class="report-page">
+        <h3>Your reports</h3>
+        <div class="post">
+            <%if(report.length == 0 ){%>
+                <h3>No Reports Yet</h3>
+            <%} else {%>
+                <% for(rep of report){%>
+                    <div id="post">
+                        <p id="postBody"><%=rep.report%></p>
+                        (<%=rep.date.toString().split(" ")[4]%>)
+                    </div>
+                <%}%>
+            <%}%>
+        </div>
+        <button id="show-form-btn" class="report-btns">Post Report</button>
+        <form id="add-form" class="hidden" method="post" action="/report/create">
+            <label for="postrep">Post your complain:</label></br>
+            <textarea name="postrep" row="5" cols="50" maxlength="500"></textarea></br>
+            <button class="report-btns"  type="submit">Post</button>
+        </form>
+        <hr />
+        <div class="close">
+            <a href="/dashboard">Close</a>
+        </div>
+        <script>
+            const showBtn = document.getElementById('show-form-btn');
+            const form = document.getElementById('add-form');
+        
+            showBtn.addEventListener('click', () => {
+              form.classList.toggle('hidden');
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM: Login</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+    <h1>Please, Give appropriate info to get logged in</h1>
+    <form class="log-frm" action="/login" method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label> <br>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="phoneNumber">Phone:</label>  <br>  
+        <input id="phone" name="phoneNumber" required><br><br>
+
+        <button Type="submit">Sign in</button>
+
+        <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+
+    </form>
+</body>
+</html>
